@@ -10,8 +10,8 @@ class Carre:
         self.y = y
         self.taille = taille
 
-class Pomme(Carre):
-    def __init__(self, image, taille): #TODO: à refaire
+class Pomme():
+    def __init__(self, image, taille):
         self.case_x = rand.randint(0, nombre_sprite_cote-1)
         self.case_y = rand.randint(0, nombre_sprite_cote-1)
         self.x = self.case_x * taille_sprite
