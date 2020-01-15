@@ -124,7 +124,7 @@ while continuer:
                 snake.estMort = True
 
         if snake.estMort:
-            snake.initialisation()
+            snake.reinitialisation()
             continuer_jeu = 0
             game_over = 1
 

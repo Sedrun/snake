@@ -46,7 +46,7 @@ class Snake:
         self.carres.append(Carre(self.image, self.x, self.y, taille)) #NEW
         self.nb_carres += 1
 
-    def initialisation(self):
+    def reinitialisation(self):
         for i in range (self.nb_carres-1, 0, -1):
             self.carres.pop(i)
         self.nb_carres = 1
