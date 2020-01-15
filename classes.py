@@ -89,6 +89,16 @@ class Snake:
         for i in range(self.nb_carres -1, 0, -1):
             self.carres[i].x = self.carres[i-1].x
             self.carres[i].y = self.carres[i-1].y
+
+    def accueil(self):
+        if self.case_y == 0 and self.case_x < 19:
+            self.deplacer('droite')
+        if self.case_x == 19 and self.case_y < 19:
+            self.deplacer('bas')
+        if self.case_y == 19 and self.case_x > 0:
+            self.deplacer('gauche')
+        if self.case_x == 0 and self.case_y > 0:
+            self.deplacer('haut')
 #New
 class Score:
     def __init__(self):

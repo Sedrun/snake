@@ -49,15 +49,7 @@ while continuer:
         fenetre.blit(texte_jouer, texte_jouer_xy)  # affichage de text_explicatif1
         fenetre.blit(texte_quitter, texte_quitter_xy)  # affichage de text_explicatif2
 
-        #TODO:animation a mettre dans la classe Snake
-        if snake_accueil.case_y == 0 and snake_accueil.case_x < 19:
-            snake_accueil.deplacer('droite')
-        if snake_accueil.case_x == 19 and snake_accueil.case_y < 19:
-            snake_accueil.deplacer('bas')
-        if snake_accueil.case_y == 19 and snake_accueil.case_x > 0:
-            snake_accueil.deplacer('gauche')
-        if snake_accueil.case_x == 0 and snake_accueil.case_y > 0:
-            snake_accueil.deplacer('haut')
+        snake_accueil.accueil()
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -140,6 +132,7 @@ while continuer:
         pygame.display.flip()
 
     while game_over:
+        pygame.mixer.music.stop()
         pygame.time.Clock().tick(FPS)
 
         texte_score = score.afficher()
