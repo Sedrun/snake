@@ -75,6 +75,7 @@ while continuer:
 #ENEW
     #BOUCLE DE JEU
     while continuer_jeu:
+        print(snake.nb_carres)
         #limitation de vitesse de la boucle
         pygame.time.Clock().tick(FPS)
         for event in pygame.event.get():
@@ -115,10 +116,7 @@ while continuer:
             if snake.tete.x == snake.carres[i].x and snake.tete.y == snake.carres[i].y:
                 snake.estMort = True
 
-        if snake.estMort:
-            snake.reinitialisation()
-            continuer_jeu = 0
-            game_over = 1
+
 
         #Affichage aux nouvelles positions
         fenetre.blit(background, (0,0))
@@ -128,6 +126,11 @@ while continuer:
             image_corps = pygame.transform.scale(image_corps, (snake.carres[i].taille, snake.carres[i].taille))
             fenetre.blit(image_corps, (snake.carres[i].x, snake.carres[i].y))
         fenetre.blit(image_pomme, (pomme.x, pomme.y))
+
+        if snake.estMort:
+            snake.reinitialisation()
+            continuer_jeu = 0
+            game_over = 1
 
         pygame.display.flip()
 

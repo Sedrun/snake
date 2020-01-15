@@ -35,8 +35,9 @@ class Snake:
         self.image = image
         #carres
         self.tete = Carre(self.image, self.case_x, self.case_y, taille)
-        self.carres = [self.tete]
-        self.nb_carres = 1
+        self.carres = [self.tete, Carre(self.image, self.x - taille_sprite, self.y, taille),
+                       Carre(self.image, self.x - 2 * taille_sprite, self.y, taille)]
+        self.nb_carres = 3
         #direction
         self.direction = "droite"
         #est-il mort ?
@@ -49,7 +50,6 @@ class Snake:
     def reinitialisation(self):
         for i in range (self.nb_carres-1, 0, -1):
             self.carres.pop(i)
-        self.nb_carres = 1
         self.estMort = False
 
     def deplacer(self, direction):
