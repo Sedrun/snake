@@ -33,6 +33,7 @@ isMute = False
 
 continuer = 1
 fenetre_accueil = 1
+choix_diff = 0
 continuer_jeu = 0
 game_over = 0
 #BOUCLE PRINCIPALE
@@ -70,7 +71,7 @@ while continuer:
             if event.type == KEYDOWN:
                 if event.key == K_SPACE:
                     score.reinitialisation()
-                    continuer_jeu = 1
+                    choix_diff = 1
                     fenetre_accueil = 0
                 if event.key == K_ESCAPE:
                     continuer = 0
@@ -84,6 +85,49 @@ while continuer:
 
         pygame.display.flip()  # permet un affichage dynamique dans cette fenêtre (on ne voit plus le serpent
         fenetre.blit(background, (0, 0))
+
+
+    while choix_diff:
+            hauteur_menu = 0
+            pygame.time.Clock().tick(FPS)
+            # Ecran accueil
+            fenetre.blit(texte_accueil, texte_accueil_xy)
+            fenetre.blit(texte_jouer, texte_jouer_xy)  # affichage de text_explicatif1
+            fenetre.blit(texte_quitter, texte_quitter_xy)  # affichage de text_explicatif2
+
+            snake_accueil.accueil()
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    fenetre_accueil = 0
+                    continuer = 0
+                if event.type == KEYDOWN:
+                    if event.key == K_1:
+                        score.reinitialisation(1)
+                        FPS = 20
+                        continuer_jeu = 1
+                        choix_diff = 0
+                    if event.key == K_2:
+                        score.reinitialisation(2)
+                        FPS = 30
+                        continuer_jeu = 1
+                        choix_diff = 0
+                    if event.key == K_3:
+                        FPS = 45
+                        score.reinitialisation(3)
+                        continuer_jeu = 1
+                        choix_diff = 0
+
+            fenetre.blit(image_snake, (snake_accueil.x, snake_accueil.y))
+            image_corps = pygame.image.load(corps).convert_alpha()
+            for i in range(1, snake_accueil.nb_carres):
+                image_corps = pygame.transform.scale(image_corps, (snake_accueil.carres[i].taille, snake_accueil.carres[i].taille))
+                fenetre.blit(image_corps, (snake_accueil.carres[i].x, snake_accueil.carres[i].y))
+
+            pygame.display.flip()  # permet un affichage dynamique dans cette fenêtre (on ne voit plus le serpent
+            fenetre.blit(background, (0, 0))
+
+
 #ENEW
     #BOUCLE DE JEU
     while continuer_jeu:
@@ -166,6 +210,9 @@ while continuer:
             game_over = 1
 
         pygame.display.flip()
+
+
+
 
     while game_over:
         pygame.mixer.music.stop()
