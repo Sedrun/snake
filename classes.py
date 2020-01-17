@@ -25,7 +25,6 @@ class Pomme():
         self.y = self.case_y * taille_sprite
 
 class Snake:
-    #NEW
     def __init__(self, image, case_x, case_y):
         #position du personnage en case et en pixel
         self.case_x = case_x
@@ -42,7 +41,6 @@ class Snake:
         self.direction = "droite"
         #est-il mort ?
         self.estMort = False
-    #ENEW
     def addCarre(self):
         self.carres.append(Carre(self.image, self.x, self.y, taille)) #NEW
         self.nb_carres += 1
@@ -93,18 +91,19 @@ class Snake:
             self.carres[i].y = self.carres[i-1].y
 
     def accueil(self):
-        if self.case_y == 0 and self.case_x < 19:
+        if self.case_y == 2 and self.case_x < 19:
             self.deplacer('droite')
-        if self.case_x == 19 and self.case_y < 19:
+        if self.case_x == 19 and self.case_y < 17:
             self.deplacer('bas')
-        if self.case_y == 19 and self.case_x > 0:
+        if self.case_y == 17 and self.case_x > 0:
             self.deplacer('gauche')
-        if self.case_x == 0 and self.case_y > 0:
+        if self.case_x == 0 and self.case_y > 2:
             self.deplacer('haut')
-#New
 class Score:
     def __init__(self):
         self.total = 0
+        self.diffBase = 1
+        self.difficulte = self.diffBase
 
     def ajoute(self):
         if self.total < 40:
@@ -114,10 +113,10 @@ class Score:
         else:
             self.total += 16
 
-    def reinitialisation(self):
+    def reinitialisation(self, diff):
         self.total = 0
+        self.difficulte = diff
 
     def afficher(self):
         return fontH2.render("score : " + str(self.total), 1, (255, 255, 255))  # récupération du score en string
 
-#ENew

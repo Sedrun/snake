@@ -7,7 +7,7 @@ import time
 
 pygame.init()
 
-
+""" On initialise toutes nos images """
 fenetre = pygame.display.set_mode((cote_fenetre, cote_fenetre))
 background = pygame.image.load(fond)
 
@@ -26,13 +26,14 @@ rect_menu = pygame.draw.rect(fenetre,(30,30,30),(0,0,cote_fenetre,hauteur_menu))
 pygame.display.flip()
 
 button = pygame.Rect(20, 10, 40, 30)
-
+""" Initialisation des différents son entendus """
 mange = pygame.mixer.Sound("sounds/eat.wav")
 pygame.mixer.music.load("sounds/song.wav")
 isMute = False
 
 continuer = 1
 fenetre_accueil = 1
+choix_diff = 0
 continuer_jeu = 0
 game_over = 0
 #BOUCLE PRINCIPALE
@@ -40,7 +41,7 @@ game_over = 0
 while continuer:
     pygame.mixer.music.play()
     snake = Snake(image_snake, 9, 9)
-    snake_accueil = Snake(image_snake, 0, 0)
+    snake_accueil = Snake(image_snake, 2, 2)
     for i in range(5) : snake_accueil.addCarre()
     score = Score()
 #ENew
@@ -54,7 +55,6 @@ while continuer:
 #NEW
     #FENETRE D'ACCUEIL
     while fenetre_accueil:
-        hauteur_menu = 0
         pygame.time.Clock().tick(FPS)
         # Ecran accueil
         fenetre.blit(texte_accueil, texte_accueil_xy)
@@ -69,8 +69,8 @@ while continuer:
                 continuer = 0
             if event.type == KEYDOWN:
                 if event.key == K_SPACE:
-                    score.reinitialisation()
-                    continuer_jeu = 1
+                    score.reinitialisation(1)
+                    choix_diff = 1
                     fenetre_accueil = 0
                 if event.key == K_ESCAPE:
                     continuer = 0
@@ -84,6 +84,48 @@ while continuer:
 
         pygame.display.flip()  # permet un affichage dynamique dans cette fenêtre (on ne voit plus le serpent
         fenetre.blit(background, (0, 0))
+
+    # FENETRE CHOIX DIFFICULTE
+    while choix_diff:
+        pygame.time.Clock().tick(FPS)
+
+        snake_accueil.accueil()
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                choix_diff = 0
+                continuer = 0
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    score.reinitialisation(score.diffBase)
+                    FPS = 30
+                    continuer_jeu = 0
+                    choix_diff = 0
+                    fenetre_accueil = 1
+                if event.key == K_F1:
+                    score.reinitialisation(1)
+                    FPS = 20
+                    continuer_jeu = 1
+                    choix_diff = 0
+                if event.key == K_F2:
+                    score.reinitialisation(2)
+                    FPS = 100
+                    continuer_jeu = 1
+                    choix_diff = 0
+                if event.key == K_F3:
+                    FPS = 200
+                    score.reinitialisation(3)
+                    continuer_jeu = 1
+                    choix_diff = 0
+
+        fenetre.blit(text_choixDiffExpl, text_choixDiffExpl_xy)
+        fenetre.blit(text_choixDiff1, text_choixDiff1_xy)
+        fenetre.blit(text_choixDiff2, text_choixDiff2_xy)
+        fenetre.blit(text_choixDiff3, text_choixDiff3_xy)
+        pygame.display.flip()
+        fenetre.blit(background, (0, 0))
+
+
 #ENEW
     #BOUCLE DE JEU
     while continuer_jeu:
@@ -91,11 +133,8 @@ while continuer:
         pygame.draw.rect(fenetre, (100, 100, 100), (0, 0, cote_fenetre, hauteur_menu))
         fenetre.blit(rect_sound, (20,10))
         pygame.display.update()
-        #limitation de vitesse de la boucle
         pygame.time.Clock().tick(FPS)
         for event in pygame.event.get():
-            #Si l'utilisateur quitte, on met la variable qui continue le jeu
-            #ET la variable générale à 0 pour fermer la fenêtre
             if event.type == QUIT:
                 continuer_jeu = 0
                 continuer = 0
@@ -104,7 +143,6 @@ while continuer:
                 if event.key == K_ESCAPE:
                     continuer_jeu = 0
                     continuer = 0
-                #Touches de déplacement de Donkey Kong
                 elif event.key == K_RIGHT and direction != 'gauche':
                     direction = 'droite'
                     break; #permet d'enlever le demi-tour immédiat
@@ -118,10 +156,8 @@ while continuer:
                     direction = 'bas'
                     break;
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_pos = event.pos  # gets mouse position
+                mouse_pos = event.pos
 
-                # checks if mouse position is over the button
-                #TODO : CHANGER LE NOM, SI ON APPUIE SUR LE SON
                 if button.collidepoint(mouse_pos):
                     if (isMute):
                         image = sound
@@ -167,6 +203,9 @@ while continuer:
 
         pygame.display.flip()
 
+
+
+
     while game_over:
         pygame.mixer.music.stop()
         pygame.time.Clock().tick(FPS)
@@ -187,11 +226,11 @@ while continuer:
                 continuer = 0
             if event.type == KEYDOWN:
                 if event.key == K_SPACE:
-                    score.reinitialisation()
+                    score.reinitialisation(score.diffBase)
                     continuer_jeu = 1
                     game_over = 0
                 if event.key == K_ESCAPE:
-                    score.reinitialisation()
+                    score.reinitialisation(score.diffBase)
                     game_over = 0
                     fenetre_accueil = 1
         pygame.display.flip()  # permet un affichage dynamique dans cette fenêtre (on ne voit plus le serpent
