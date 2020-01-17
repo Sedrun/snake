@@ -13,14 +13,14 @@ class Carre:
 class Pomme():
     def __init__(self, image, taille):
         self.case_x = rand.randint(0, nombre_sprite_cote-1)
-        self.case_y = rand.randint(0, nombre_sprite_cote-1)
+        self.case_y = rand.randint(hauteur_menu/taille_sprite, nombre_sprite_cote-1)
         self.x = self.case_x * taille_sprite
         self.y = self.case_y * taille_sprite
         self.taille = taille
 
     def changement(self):
         self.case_x = rand.randint(0, nombre_sprite_cote-1)
-        self.case_y = rand.randint(0, nombre_sprite_cote-1)
+        self.case_y = rand.randint(hauteur_menu/taille_sprite, nombre_sprite_cote-1)
         self.x = self.case_x * taille_sprite
         self.y = self.case_y * taille_sprite
 
@@ -74,7 +74,7 @@ class Snake:
 
         # Déplacement vers le haut
         elif direction == 'haut':
-            if self.case_y > 0:
+            if self.case_y > hauteur_menu/taille_sprite:
                 self.case_y -= 1
                 self.y = self.case_y * taille_sprite
             else: self.estMort = True

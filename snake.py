@@ -17,8 +17,19 @@ image_snake = pygame.transform.scale(image_snake, (taille, taille))
 image_pomme = pygame.image.load(pomme).convert_alpha()
 image_pomme = pygame.transform.scale(image_pomme, (taille, taille))
 
+image = sound
+
+rect_sound = pygame.image.load(image).convert_alpha()
+rect_sound = pygame.transform.scale(rect_sound, (30, 30))
+
+rect_menu = pygame.draw.rect(fenetre,(100,100,100),(0,0,cote_fenetre,hauteur_menu))
+pygame.display.flip()
+
+button = pygame.Rect(20, 10, 40, 30)
+
 mange = pygame.mixer.Sound("sounds/eat.wav")
 pygame.mixer.music.load("sounds/song.wav")
+isMute = False
 
 continuer = 1
 fenetre_accueil = 1
@@ -75,7 +86,9 @@ while continuer:
 #ENEW
     #BOUCLE DE JEU
     while continuer_jeu:
-        print(snake.nb_carres)
+        pygame.draw.rect(fenetre, (100, 100, 100), (0, 0, cote_fenetre, hauteur_menu))
+        fenetre.blit(rect_sound, (20,10))
+        pygame.display.update()
         #limitation de vitesse de la boucle
         pygame.time.Clock().tick(FPS)
         for event in pygame.event.get():
@@ -102,6 +115,24 @@ while continuer:
                 elif event.key == K_DOWN and direction != 'haut':
                     direction = 'bas'
                     break;
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = event.pos  # gets mouse position
+
+                # checks if mouse position is over the button
+                #TODO : CHANGER LE NOM, SI ON APPUIE SUR LE SON
+                if button.collidepoint(mouse_pos):
+                    if (isMute):
+                        image = sound
+                        pygame.mixer.music.set_volume(1)
+                        isMute = False
+                    else :
+                        image = mute
+                        pygame.mixer.music.set_volume(0)
+                        isMute = True
+                    rect_sound = pygame.image.load(image).convert_alpha()
+                    rect_sound = pygame.transform.scale(rect_sound, (30, 30))
+                    fenetre.blit(rect_sound, (20, 10))
+                    pygame.display.update()
         snake.deplacer(direction)
         if snake.case_x == pomme.case_x and snake.case_y == pomme.case_y:
             mange.play()

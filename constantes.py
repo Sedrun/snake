@@ -6,7 +6,8 @@ pygame.init() #NEW
 nombre_sprite_cote = 20
 taille_sprite = 30
 cote_fenetre = nombre_sprite_cote * taille_sprite
-FPS = 20
+FPS = 30
+hauteur_menu = 60
 
 
 taille = 30
@@ -14,6 +15,8 @@ tete = "images/tetete.png"
 corps = "images/tete2.png"
 fond = "images/fond.png"
 pomme = "images/pomme.png"
+sound = "images/sound.png"
+mute = "images/mute.png"
 
 
 #New
