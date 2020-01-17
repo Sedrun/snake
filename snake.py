@@ -70,7 +70,7 @@ while continuer:
                 continuer = 0
             if event.type == KEYDOWN:
                 if event.key == K_SPACE:
-                    score.reinitialisation()
+                    score.reinitialisation(1)
                     choix_diff = 1
                     fenetre_accueil = 0
                 if event.key == K_ESCAPE:
@@ -86,46 +86,46 @@ while continuer:
         pygame.display.flip()  # permet un affichage dynamique dans cette fenêtre (on ne voit plus le serpent
         fenetre.blit(background, (0, 0))
 
-
+    # FENETRE CHOIX DIFFICULTE
     while choix_diff:
-            hauteur_menu = 0
-            pygame.time.Clock().tick(FPS)
-            # Ecran accueil
-            fenetre.blit(texte_accueil, texte_accueil_xy)
-            fenetre.blit(texte_jouer, texte_jouer_xy)  # affichage de text_explicatif1
-            fenetre.blit(texte_quitter, texte_quitter_xy)  # affichage de text_explicatif2
+        hauteur_menu = 0
+        pygame.time.Clock().tick(FPS)
 
-            snake_accueil.accueil()
+        snake_accueil.accueil()
 
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    fenetre_accueil = 0
-                    continuer = 0
-                if event.type == KEYDOWN:
-                    if event.key == K_1:
-                        score.reinitialisation(1)
-                        FPS = 20
-                        continuer_jeu = 1
-                        choix_diff = 0
-                    if event.key == K_2:
-                        score.reinitialisation(2)
-                        FPS = 30
-                        continuer_jeu = 1
-                        choix_diff = 0
-                    if event.key == K_3:
-                        FPS = 45
-                        score.reinitialisation(3)
-                        continuer_jeu = 1
-                        choix_diff = 0
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                choix_diff = 0
+                continuer = 0
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    score.reinitialisation(score.diffBase)
+                    FPS = 30
+                    continuer_jeu = 0
+                    choix_diff = 0
+                    fenetre_accueil = 1
+                if event.key == K_F1:
+                    score.reinitialisation(1)
+                    FPS = 20
+                    continuer_jeu = 1
+                    choix_diff = 0
+                if event.key == K_F2:
+                    score.reinitialisation(2)
+                    FPS = 30
+                    continuer_jeu = 1
+                    choix_diff = 0
+                if event.key == K_F3:
+                    FPS = 45
+                    score.reinitialisation(3)
+                    continuer_jeu = 1
+                    choix_diff = 0
 
-            fenetre.blit(image_snake, (snake_accueil.x, snake_accueil.y))
-            image_corps = pygame.image.load(corps).convert_alpha()
-            for i in range(1, snake_accueil.nb_carres):
-                image_corps = pygame.transform.scale(image_corps, (snake_accueil.carres[i].taille, snake_accueil.carres[i].taille))
-                fenetre.blit(image_corps, (snake_accueil.carres[i].x, snake_accueil.carres[i].y))
-
-            pygame.display.flip()  # permet un affichage dynamique dans cette fenêtre (on ne voit plus le serpent
-            fenetre.blit(background, (0, 0))
+        fenetre.blit(text_choixDiffExpl, text_choixDiffExpl_xy)
+        fenetre.blit(text_choixDiff1, text_choixDiff1_xy)
+        fenetre.blit(text_choixDiff2, text_choixDiff2_xy)
+        fenetre.blit(text_choixDiff3, text_choixDiff3_xy)
+        pygame.display.flip()
+        fenetre.blit(background, (0, 0))
 
 
 #ENEW
@@ -234,11 +234,11 @@ while continuer:
                 continuer = 0
             if event.type == KEYDOWN:
                 if event.key == K_SPACE:
-                    score.reinitialisation()
+                    score.reinitialisation(score.diffBase)
                     continuer_jeu = 1
                     game_over = 0
                 if event.key == K_ESCAPE:
-                    score.reinitialisation()
+                    score.reinitialisation(score.diffBase)
                     game_over = 0
                     fenetre_accueil = 1
         pygame.display.flip()  # permet un affichage dynamique dans cette fenêtre (on ne voit plus le serpent

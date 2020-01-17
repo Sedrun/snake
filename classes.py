@@ -103,7 +103,8 @@ class Snake:
 class Score:
     def __init__(self):
         self.total = 0
-        self.difficulte = 1
+        self.diffBase = 1
+        self.difficulte = self.diffBase
 
     def ajoute(self):
         if self.total < 40:
