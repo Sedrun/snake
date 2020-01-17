@@ -77,7 +77,9 @@ class Snake:
             if self.case_y > hauteur_menu/taille_sprite:
                 self.case_y -= 1
                 self.y = self.case_y * taille_sprite
-            else: self.estMort = True
+            else:
+                self.estMort = True
+
 
         # Déplacement vers le bas
         elif direction == 'bas':

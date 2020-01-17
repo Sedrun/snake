@@ -44,7 +44,7 @@ while continuer:
     for i in range(5) : snake_accueil.addCarre()
     score = Score()
 #ENew
-
+    hauteur_menu = 60
     pomme = Pomme(image_pomme, 30)
 
     fenetre.blit(background, (0, 0))
