@@ -7,7 +7,7 @@ nombre_sprite_cote = 20
 taille_sprite = 30
 cote_fenetre = nombre_sprite_cote * taille_sprite
 FPS = 30
-hauteur_menu = 0
+hauteur_menu = 60
 
 
 taille = 30
