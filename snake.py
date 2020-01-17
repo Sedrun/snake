@@ -22,7 +22,7 @@ image = sound
 rect_sound = pygame.image.load(image).convert_alpha()
 rect_sound = pygame.transform.scale(rect_sound, (30, 30))
 
-rect_menu = pygame.draw.rect(fenetre,(100,100,100),(0,0,cote_fenetre,hauteur_menu))
+rect_menu = pygame.draw.rect(fenetre,(30,30,30),(0,0,cote_fenetre,hauteur_menu))
 pygame.display.flip()
 
 button = pygame.Rect(20, 10, 40, 30)
@@ -54,6 +54,7 @@ while continuer:
 #NEW
     #FENETRE D'ACCUEIL
     while fenetre_accueil:
+        hauteur_menu = 0
         pygame.time.Clock().tick(FPS)
         # Ecran accueil
         fenetre.blit(texte_accueil, texte_accueil_xy)
@@ -86,6 +87,7 @@ while continuer:
 #ENEW
     #BOUCLE DE JEU
     while continuer_jeu:
+        hauteur_menu = 60
         pygame.draw.rect(fenetre, (100, 100, 100), (0, 0, cote_fenetre, hauteur_menu))
         fenetre.blit(rect_sound, (20,10))
         pygame.display.update()
