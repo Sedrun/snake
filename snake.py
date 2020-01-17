@@ -109,11 +109,11 @@ while continuer:
                     choix_diff = 0
                 if event.key == K_F2:
                     score.reinitialisation(2)
-                    FPS = 100
+                    FPS = 30
                     continuer_jeu = 1
                     choix_diff = 0
                 if event.key == K_F3:
-                    FPS = 200
+                    FPS = 45
                     score.reinitialisation(3)
                     continuer_jeu = 1
                     choix_diff = 0
