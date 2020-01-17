@@ -103,6 +103,8 @@ class Snake:
 class Score:
     def __init__(self):
         self.total = 0
+        self.diffBase = 1
+        self.difficulte = self.diffBase
 
     def ajoute(self):
         if self.total < 40:
@@ -112,8 +114,9 @@ class Score:
         else:
             self.total += 16
 
-    def reinitialisation(self):
+    def reinitialisation(self, diff):
         self.total = 0
+        self.difficulte = diff
 
     def afficher(self):
         return fontH2.render("score : " + str(self.total), 1, (255, 255, 255))  # récupération du score en string

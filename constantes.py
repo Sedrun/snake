@@ -26,6 +26,15 @@ fontH2 = pygame.font.Font(None,40) # font de choses importantes mais pas gros ti
 texte_accueil = fontTitre.render("Le jeu du Snake",1,(255,255,255))
 texte_accueil_rect = texte_accueil.get_rect()
 
+text_choixDiffExpl = fontTitre.render("Choisissez votre difficulté",1,(255,255,255))
+text__choixDiff1rect = text_choixDiffExpl.get_rect()
+text_choixDiff1 = fontH2.render(" F1 - facile",1,(255,255,255))
+text__choixDiff1rect = text_choixDiff1.get_rect()
+text_choixDiff2 = fontH2.render(" F2 - moyen",1,(255,255,255))
+text_choixDiff2_rect = text_choixDiff2.get_rect()
+text_choixDiff3 = fontH2.render(" F3 - difficile",1,(255,255,255))
+text_choixDiff3_rect = text_choixDiff3.get_rect()
+
 texte_jouer = fontH2.render("Espace pour commencer une partie",1,(255,255,255))
 texte_jouer_rect = texte_jouer.get_rect()
 
@@ -43,6 +52,12 @@ text_explicatif2_rect = text_explicatif2.get_rect()
 
 
 texte_accueil_xy = (cote_fenetre/2 - texte_accueil_rect.width/2,cote_fenetre/4 - texte_accueil_rect.height/2)
+
+text_choixDiffExpl_xy = (cote_fenetre/5 - text_GO_rect.width/2,cote_fenetre/10 - text_GO_rect.height/2)
+text_choixDiff1_xy = (cote_fenetre/2 - text_explicatif1_rect.width/2, cote_fenetre/10*4 - text_explicatif1_rect.height/2)
+text_choixDiff2_xy = (cote_fenetre/2 - text_explicatif1_rect.width/2, cote_fenetre/10*6 - text_explicatif1_rect.height/2)
+text_choixDiff3_xy = (cote_fenetre/2 - text_explicatif1_rect.width/2, cote_fenetre/10*8 - text_explicatif1_rect.height/2)
+
 
 texte_go_xy = (cote_fenetre/2 - text_GO_rect.width/2,cote_fenetre/4 - text_GO_rect.height/2)
 texte_jouer_xy = (cote_fenetre/2 - texte_jouer_rect.width/2, cote_fenetre/10*5 - texte_jouer_rect.height/2)
